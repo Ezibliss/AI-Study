@@ -1,5 +1,4 @@
 import streamlit as st
-from langchain_core.documents import Document
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
@@ -12,6 +11,7 @@ import docx
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_xai import ChatXAI
 from langchain.chains import ConversationalRetrievalChain
+from langchain_core.documents import Document
 
 api_key = st.secrets["xai_api_key"]
 
