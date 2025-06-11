@@ -1,5 +1,4 @@
 import streamlit as st
-from dotenv import load_dotenv
 from langchain_core.documents import Document
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.vectorstores import FAISS
@@ -20,6 +19,7 @@ from langchain_xai import ChatXAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.prompts import PromptTemplate
 
+api_key = st.secrets["xai_api_key"]
 
 # Upload the document
 uploaded_file = st.file_uploader("📄 Upload a PDF or DOCX file", type=["pdf", "docx"])
