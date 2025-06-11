@@ -72,7 +72,8 @@ llm = ChatXAI(
     temperature=0.3,
     api_key=xai_api_key,
     openai_api_base="https://api.x.ai/v1",   # Replace with actual XAI base URL
-    model="grok-3-mini-fast"  # Replace with your actual model name)
+    model="grok-3-mini-fast"  # Replace with your actual model name
+)
 
         # Step 4: Retrieval-based QA
 qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=db.as_retriever())
