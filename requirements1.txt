@@ -4,4 +4,5 @@ langchain
 PyMuPDF
 python-docx
 langchain_huggingface
+langchain-core
 langchain_xai
