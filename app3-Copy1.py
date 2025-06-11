@@ -4,7 +4,6 @@ from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI 
 from langchain.chains import RetrievalQA
-from langchain.chat_models import ChatOpenAI
 import os
 import fitz  # PyMuPDF
 import docx
