@@ -54,8 +54,8 @@ if uploaded_file:
     # Ask for XAI API Key
     #xai_api_key = st.text_input("xai_api_key")
 
-    if xai_api_key:
-        os.environ["xai_api_key"] = xai_api_key  # Optional, if the SDK uses env variable
+    #if xai_api_key:
+        #os.environ["xai_api_key"] = xai_api_key  # Optional, if the SDK uses env variable
 
         # Step 1: Split into chunks
         splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=100)
