@@ -13,7 +13,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain_core.documents import Document
 import base64
 
-api_key = st.secrets["xai_api_key"]
+
 
 # Upload the document
 uploaded_file = st.file_uploader("📄 Upload a PDF or DOCX file", type=["pdf", "docx"])
@@ -67,6 +67,8 @@ if uploaded_file:
 
         # Step 3: Connect to XAI LLM
         # If LangChain supports XAI via ChatOpenAI-compatible wrapper:
+        api_key = st.secrets["xai_api_key"]
+        
         llm = ChatXAI(
             temperature=0.3,
             api_key=xai_api_key,
