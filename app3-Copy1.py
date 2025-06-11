@@ -28,9 +28,9 @@ if uploaded_file:
                 text += page.get_text()
             except Exception as e:
                 st.warning(f"⚠️ Skipping a page due to error: {e}")
-        except Exception as e:
-            st.error(f"❌ Failed to read PDF: {e}")
-            text = ""
+    except Exception as e:
+        st.error(f"❌ Failed to read PDF: {e}")
+        text = ""
     elif uploaded_file.name.endswith(".docx"):
         doc = docx.Document(uploaded_file)
         text = "\n".join([para.text for para in doc.paragraphs])
