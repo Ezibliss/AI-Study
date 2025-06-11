@@ -21,7 +21,7 @@ if uploaded_file:
     st.success("✅ File uploaded successfully!")
 
     if uploaded_file.name.endswith(".pdf"):
-        doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
+        doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
         text = ""
         for page in doc:
             text += page.get_text()
