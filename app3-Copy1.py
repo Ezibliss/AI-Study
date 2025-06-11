@@ -17,10 +17,11 @@ import base64
 
 # Upload the document
 uploaded_file = st.file_uploader("📄 Upload a PDF or DOCX file", type=["pdf", "docx"])
+text = ""
 
 if uploaded_file:
     st.success("✅ File uploaded successfully!")
-    text = ""
+    #text = ""
     
     if uploaded_file.name.endswith(".pdf"):
         try:
