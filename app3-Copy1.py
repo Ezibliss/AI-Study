@@ -41,7 +41,9 @@ if uploaded_file:
         except Exception as e:
             st.error(f"❌ Failed to read DOCX: {e}")
             text = ""
-    
+
+    api_key = st.secrets["xai_api_key"]
+
     else:
         st.warning("⚠️ Unsupported file type")
         text = ""
@@ -52,10 +54,10 @@ if uploaded_file:
 
         
     # Ask for XAI API Key
-    xai_api_key = st.text_input("xai_api_key")
+    #xai_api_key = st.text_input("xai_api_key")
 
-    if xai_api_key:
-        os.environ["xai_api_key"] = xai_api_key  # Optional, if the SDK uses env variable
+    #if xai_api_key:
+        #os.environ["xai_api_key"] = xai_api_key  # Optional, if the SDK uses env variable
 
         # Step 1: Split into chunks
         splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=100)
@@ -69,7 +71,7 @@ if uploaded_file:
         # If LangChain supports XAI via ChatOpenAI-compatible wrapper:
         llm = ChatXAI(
             temperature=0.3,
-            api_key='xai_api_key',
+            api_key=xai_api_key,
             openai_api_base="https://api.x.ai/v1",   # Replace with actual XAI base URL
             model="grok-3-mini-fast"  # Replace with your actual model name
         )
