@@ -11,6 +11,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_xai import ChatXAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain_core.documents import Document
+import base64
 
 api_key = st.secrets["xai_api_key"]
 
@@ -53,8 +54,8 @@ if uploaded_file:
     # Ask for XAI API Key
     #xai_api_key = st.text_input("xai_api_key")
 
-    #if xai_api_key:
-        #os.environ["xai_api_key"] = xai_api_key  # Optional, if the SDK uses env variable
+    if xai_api_key:
+        os.environ["xai_api_key"] = xai_api_key  # Optional, if the SDK uses env variable
 
         # Step 1: Split into chunks
         splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=100)
@@ -85,47 +86,46 @@ if uploaded_file:
             answer = qa_chain.run(user_question)
             st.markdown("🎓 *Answer:* " + answer)
 
-import streamlit as st
 
-# Custom CSS
-st.markdown("""
+
+# Load local background image and convert to base64
+with open("AI Study.jpg", "rb") as image_file:  # Replace with your file name
+    img_bytes = image_file.read()
+    img_base64 = base64.b64encode(img_bytes).decode()
+
+# Inject custom CSS using local image
+st.markdown(f"""
     <style>
-        .main {
-            background-color: #f0f4f8;
-            background-image: url("AI Study.jpg");
+        .stApp {{
+            background-image: url("data:image/png;base64,{img_base64}");
             background-size: cover;
             background-position: center;
-            padding: 2rem;
-            color: #fff;
-        }
+            background-repeat: no-repeat;
+        }}
 
-        h1, h2, h3 {
-            color: #ffffff !important;
-        }
-
-        .stTextInput > div > div > input {
-            background-color: #ffffff;
-            color: #000;
-        }
-
-        .stTextArea > div > textarea {
-            background-color: #ffffff;
-            color: #000;
-        }
-
-        .css-1v0mbdj {
-            background-color: rgba(255, 255, 255, 0.8);
+        .css-1v0mbdj {{
+            background-color: rgba(255, 255, 255, 0.85);
             padding: 20px;
             border-radius: 15px;
-        }
+        }}
+
+        h1, h2, h3 {{
+            color: #ffffff !important;
+        }}
+
+        .stTextInput > div > div > input,
+        .stTextArea > div > textarea {{
+            background-color: #ffffff;
+            color: #000000;
+        }}
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🎓 Your Study Companion")
-
-col1, col2 = st.columns([1, 2])
+# Display logo and title
+col1, col2 = st.columns([1, 3])
 with col1:
-    st.image("Studylogo.png", width=100)
+    st.image("Studylogo.png", width=120)  # Replace with your logo file
 with col2:
-    st.title("Your Study Companion")
+    st.markdown("Your Study Companion")
 
+st.markdown("Welcome! Please Upload your materials and ask any question.")
