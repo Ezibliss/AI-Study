@@ -20,9 +20,8 @@ uploaded_file = st.file_uploader("📄 Upload a PDF or DOCX file", type=["pdf", 
 
 if uploaded_file:
     st.success("✅ File uploaded successfully!")
-
     text = ""
-
+    
     if uploaded_file.name.endswith(".pdf"):
         try:
             doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
@@ -52,40 +51,36 @@ if uploaded_file:
 
         
     # Ask for XAI API Key
-    xai_api_key = st.text_input("xai_api_key")
+xai_api_key = st.text_input("xai_api_key")
 
     #if xai_api_key:
         #os.environ["xai_api_key"] = xai_api_key  # Optional, if the SDK uses env variable
 
         # Step 1: Split into chunks
-        splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-        docs = [Document(page_content=chunk) for chunk in splitter.split_text(text)]
+splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+docs = [Document(page_content=chunk) for chunk in splitter.split_text(text)]
 
         # Step 2: Embed chunks
-        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L6-v2")
-        db = FAISS.from_documents(docs, embeddings)
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L6-v2")
+db = FAISS.from_documents(docs, embeddings)
 
         # Step 3: Connect to XAI LLM
         # If LangChain supports XAI via ChatOpenAI-compatible wrapper:
-        api_key = st.secrets["xai_api_key"]
+api_key = st.secrets["xai_api_key"]
         
-        llm = ChatXAI(
-            temperature=0.3,
-            api_key=xai_api_key,
-            openai_api_base="https://api.x.ai/v1",   # Replace with actual XAI base URL
-            model="grok-3-mini-fast"  # Replace with your actual model name
-        )
+llm = ChatXAI(
+    temperature=0.3,
+    api_key=xai_api_key,
+    openai_api_base="https://api.x.ai/v1",   # Replace with actual XAI base URL
+    model="grok-3-mini-fast"  # Replace with your actual model name)
 
         # Step 4: Retrieval-based QA
-        qa_chain = RetrievalQA.from_chain_type(
-            llm=llm,
-            retriever=db.as_retriever()
-        )
+qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=db.as_retriever())
 
         # Step 5: Ask a question
-        user_question = st.text_input("💬 Ask a question about your course:")
-        if user_question:
-            answer = qa_chain.run(user_question)
+user_question = st.text_input("💬 Ask a question about your course:")
+if user_question:
+    answer = qa_chain.run(user_question)
             st.markdown("🎓 *Answer:* " + answer)
 
 
