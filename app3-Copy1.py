@@ -41,9 +41,6 @@ if uploaded_file:
         except Exception as e:
             st.error(f"❌ Failed to read DOCX: {e}")
             text = ""
-
-    api_key = st.secrets["xai_api_key"]
-
     else:
         st.warning("⚠️ Unsupported file type")
         text = ""
