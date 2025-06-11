@@ -8,3 +8,4 @@ langchain_xai
 langchain-core
 langchain-community
 langchain-openai
+sentence-transformers
