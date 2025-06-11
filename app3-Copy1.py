@@ -93,7 +93,7 @@ st.markdown("""
     <style>
         .main {
             background-color: #f0f4f8;
-            background-image: url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+            background-image: url("AI Study.jpg");
             background-size: cover;
             background-position: center;
             padding: 2rem;
