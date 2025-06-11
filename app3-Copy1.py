@@ -24,7 +24,13 @@ if uploaded_file:
         doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
         text = ""
         for page in doc:
-            text += page.get_text()
+            try:
+                text += page.get_text()
+            except Exception as e:
+                st.warning(f"⚠️ Skipping a page due to error: {e}")
+        except Exception as e:
+            st.error(f"❌ Failed to read PDF: {e}")
+            text = ""
     elif uploaded_file.name.endswith(".docx"):
         doc = docx.Document(uploaded_file)
         text = "\n".join([para.text for para in doc.paragraphs])
