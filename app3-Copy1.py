@@ -20,26 +20,37 @@ uploaded_file = st.file_uploader("📄 Upload a PDF or DOCX file", type=["pdf", 
 if uploaded_file:
     st.success("✅ File uploaded successfully!")
 
+    text = ""
+
     if uploaded_file.name.endswith(".pdf"):
-        doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
-        text = ""
-        for page in doc:
-            try:
-                text += page.get_text()
-            except Exception as e:
-                st.warning(f"⚠️ Skipping a page due to error: {e}")
-    except Exception as e:
-        st.error(f"❌ Failed to read PDF: {e}")
-        text = ""
+        try:
+            doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
+            for page in doc:
+                try:
+                    text += page.get_text()
+                except Exception as e:
+                    st.warning(f"⚠️ Skipping a page due to error: {e}")
+        except Exception as e:
+            st.error(f"❌ Failed to read PDF: {e}")
+            text = ""
+    
     elif uploaded_file.name.endswith(".docx"):
-        doc = docx.Document(uploaded_file)
-        text = "\n".join([para.text for para in doc.paragraphs])
+        try:
+            doc = docx.Document(uploaded_file)
+            text = "\n".join([para.text for para in doc.paragraphs])
+        except Exception as e:
+            st.error(f"❌ Failed to read DOCX: {e}")
+            text = ""
+    
     else:
-        st.warning("Unsupported file type")
+        st.warning("⚠️ Unsupported file type")
         text = ""
 
-    st.text_area("📄 Extracted Text", text[:1000])
+    if text:
+        st.text_area("📄 Extracted Text", text[:1000])
 
+
+        
     # Ask for XAI API Key
     xai_api_key = st.text_input("xai_api_key")
 
