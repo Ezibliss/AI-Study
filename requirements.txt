@@ -5,3 +5,6 @@ PyMuPDF
 python-docx
 langchain_huggingface
 langchain_xai
+langchain-core
+langchain-community
+langchain-openai
