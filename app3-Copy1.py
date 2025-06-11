@@ -82,7 +82,7 @@ qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=db.as_retriever())
 user_question = st.text_input("💬 Ask a question about your course:")
 if user_question:
     answer = qa_chain.run(user_question)
-            st.markdown("🎓 *Answer:* " + answer)
+    st.markdown("🎓 *Answer:* " + answer)
 
 
 
