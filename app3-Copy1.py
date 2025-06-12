@@ -75,7 +75,7 @@ if uploaded_file:
 
 
 # Load local background image and convert to base64
-with open("AI Study.jpg", "rb") as image_file:  # Replace with your file name
+with open("AI dark.jpg", "rb") as image_file:  # Replace with your file name
     img_bytes = image_file.read()
     img_base64 = base64.b64encode(img_bytes).decode()
 
