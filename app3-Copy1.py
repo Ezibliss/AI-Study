@@ -80,7 +80,7 @@ with open("AI dark.jpg", "rb") as image_file:  # Replace with your file name
     img_base64 = base64.b64encode(img_bytes).decode()
 
 # Inject custom CSS using local image
-st.markdown(f"""
+st.markdown("""
     <style>
         .stApp {{
             background-image: url("data:image/png;base64,{img_base64}");
