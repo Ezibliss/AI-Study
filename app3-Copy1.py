@@ -87,31 +87,30 @@ st.markdown(f"""
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            color: #ffffff;
         }}
 
-        .css-1v0mbdj {{
-            background-color: rgba(255, 255, 255, 0.85);
+        .css-1v0mbdj, .css-1cpxqw2, .css-1d391kg, .css-ffhzg2 {{
+            background-color: rgba(0, 0, 0, 0.5);  /* semi-transparent dark box */
+            color: #ffffff !important;
             padding: 20px;
             border-radius: 15px;
         }}
 
-        h1, h2, h3 {{
-            color: #000000 !important;
+        h1, h2, h3, h4, h5, h6, p, label, .stMarkdown, .stTextInput label {{
+            color: #ffffff !important;
         }}
 
         .stTextInput > div > div > input,
-        .stTextArea > div > textarea {{
-            background-color: #ffffff, 0.5;
-            color: #000000;
+        .stTextArea > div > textarea,
+        .stTextInput input {{
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid #ffffff;
+        }}
+
+        .stFileUploader {{
+            color: #ffffff !important;
         }}
     </style>
 """, unsafe_allow_html=True)
-
-# Display logo and title
-col1, col2 = st.columns([1, 3])
-with col1:
-    st.image("Studylogo.png", width=120)  # Replace with your logo file
-with col2:
-    st.markdown("Your Study Companion")
-
-st.markdown("Welcome! Please Upload your materials and ask any question.")
