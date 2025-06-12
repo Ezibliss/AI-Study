@@ -96,12 +96,12 @@ st.markdown(f"""
         }}
 
         h1, h2, h3 {{
-            color: #ffffff !important;
+            color: #000000 !important;
         }}
 
         .stTextInput > div > div > input,
         .stTextArea > div > textarea {{
-            background-color: #ffffff;
+            background-color: #ffffff, 0.5;
             color: #000000;
         }}
     </style>
