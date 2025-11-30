@@ -49,7 +49,7 @@ if uploaded_file:
         embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L6-v2")
         db = FAISS.from_documents(docs, embeddings)
 
-         retriever = db.as_retriever()
+        retriever = db.as_retriever()
 
         # Step 3: Connect to XAI LLM
         # If LangChain supports XAI via ChatOpenAI-compatible wrapper:
