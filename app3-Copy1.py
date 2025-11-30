@@ -3,7 +3,7 @@ from langchain_text_splitters import CharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI 
-from langchain_community.chains import RetrievalQA
+#from langchain_community.chains import RetrievalQA
 import os
 import fitz  # PyMuPDF
 import docx
