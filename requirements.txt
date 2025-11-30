@@ -11,3 +11,5 @@ langchain-openai
 sentence-transformers
 torch
 faiss-cpu
+langchain-text-splitters
+
