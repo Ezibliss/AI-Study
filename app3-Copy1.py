@@ -74,6 +74,24 @@ Question:
 {question}
 """
     )
+    #Step 5: Ask a question
+    user_question = st.text_input("Ask a question about your document:")
+
+    
+    if user_question:
+
+        # Retrieve top chunks
+        retrieved_docs = retriever.invoke(user_question)
+
+        # Combine context text
+        context_text = "\n\n".join([doc.page_content for doc in retrieved_docs])
+
+        # Build final prompt
+        final_prompt = prompt.format(
+            context=context_text,
+            question=user_question
+        )
+        
          # Get LLM response
         response = llm.invoke(final_prompt)
 
