@@ -74,6 +74,14 @@ Question:
 {question}
 """
     )
+         # Get LLM response
+        response = llm.invoke(final_prompt)
+
+        # Extract usable content
+        answer = response.content if hasattr(response, "content") else response
+
+        # Display
+        st.markdown("### 🎓 Answer:\n" + answer)
         
         # Step 4: Retrieval-based QA
         #qa_chain = RetrievalQA.from_chain_type(
@@ -82,12 +90,12 @@ Question:
         #)
 
         # Step 5: Ask a question
-        user_question = st.text_input("💬 Ask a question about your course:")
-        if user_question:
-            answer = qa_chain.run(user_question)
-            st.markdown("🎓 *Answer:* " + answer)
+        #user_question = st.text_input("💬 Ask a question about your course:")
+        #if user_question:
+            #answer = qa_chain.run(user_question)
+            #st.markdown("🎓 *Answer:* " + answer)
 
-
+    
 
 
 
