@@ -9,7 +9,7 @@ import fitz  # PyMuPDF
 import docx
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_xai import ChatXAI
-from langchain.chains import ConversationalRetrievalChain
+#from langchain.chains import ConversationalRetrievalChain
 from langchain_core.documents import Document
 import base64
 
