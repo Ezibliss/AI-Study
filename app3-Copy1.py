@@ -58,11 +58,28 @@ if uploaded_file:
             model="grok-4-latest"  # Replace with your actual model name
         )
 
+       
+        # 4. Prompt template
+        prompt = PromptTemplate(
+        input_variables=["context", "question"],
+        template="""
+
+        Use the provided context to answer the question.
+If the answer is not found in the context, say you don't know.
+
+Context:
+{context}
+
+Question:
+{question}
+"""
+    )
+        
         # Step 4: Retrieval-based QA
-        qa_chain = RetrievalQA.from_chain_type(
-            llm=llm,
-            retriever=db.as_retriever()
-        )
+        #qa_chain = RetrievalQA.from_chain_type(
+            #llm=llm,
+        #retriever=db.as_retriever()
+        #)
 
         # Step 5: Ask a question
         user_question = st.text_input("💬 Ask a question about your course:")
